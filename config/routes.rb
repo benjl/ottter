@@ -1,4 +1,8 @@
 Ottter::Application.routes.draw do
+  resources :accidents
+
+  resources :users
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

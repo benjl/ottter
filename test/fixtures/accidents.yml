@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  tid: 1
+  details: MyString
+  time: MyString
+
+two:
+  tid: 1
+  details: MyString
+  time: MyString
