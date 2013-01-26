@@ -24,7 +24,9 @@ task :get_tweets => :environment do
 	cleaninfo = Hash[cleanid.zip(cleanstatus)]
 
 	cleaninfo.each do |k,v|
-		Accident.create(:tid => "#{k}", :details => "#{v}", :time => "Do this next")
+		if Accident.exists?(:tid => k) == false
+			Accident.create(:tid => "#{k}", :details => "#{v}", :time => "Do this next")
+		end
 	end
 	
 	puts "Done."
