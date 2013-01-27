@@ -5,22 +5,30 @@ desc "This task is called by the Heroku scheduler add-on"
 
 task :get_tweets => :environment do
   
+	def make_proper_array (nokoname, newname)
+		nokoname.each do |x|
+			newname.push(x.text)
+		end
+	end
+
 	puts "Getting tweets..." 
 	
 	tweetsxml = Nokogiri::XML(open('https://api.twitter.com/1/statuses/user_timeline.xml?screen_name=1310traffic'))
 	#tweetsxml = Nokogiri::XML(open('https://api.twitter.com/1/statuses/user_timeline.xml?screen_name=benjlcox'))
+	
 	rawstatus = tweetsxml.xpath("//status//text")
 	rawid = tweetsxml.xpath("//status/id")
+	
 	cleanstatus = []
 	cleanid = []
+	counter = 0
 
-	rawstatus.each do |x|
-		cleanstatus.push(x.text)
-	end
+	puts "Converting tweets..."
 
-	rawid.each do |x|
-		cleanid.push(x.text)
-	end
+	make_proper_array(rawstatus, cleanstatus)
+	make_proper_array(rawid, cleanid)
+
+	puts "Cleaning tweets..."
 
 	cleanstatus.each do |x|
 		x.gsub!(/^.{9}/, "")
@@ -28,15 +36,20 @@ task :get_tweets => :environment do
 		x[0] = x.first.capitalize[0]
 	end
 
+	puts "Merging tweets with ids..."
+
 	cleaninfo = Hash[cleanid.zip(cleanstatus)]
+
+	puts "Adding tweets to db..."
 
 	cleaninfo.each do |k,v|
 	#	if Accident.exists?(:tid => k) == false
 	#		Accident.create(:tid => "#{k}", :details => "#{v}", :time => "Do this next")
+	#	counter += 1
 	#	end
 	puts "Key = #{k} and Value = #{v}"
 	end
 	
-	puts "Done."
+	puts "Done. Records added: #{counter}"
 
 end
