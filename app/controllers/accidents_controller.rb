@@ -3,6 +3,7 @@ class AccidentsController < ApplicationController
   # GET /accidents.json
   def index
     @accidents = Accident.all
+    @users = User.all
 
     respond_to do |format|
       format.html # index.html.erb

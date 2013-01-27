@@ -1,7 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
 
-desc "This task is called by the Heroku scheduler add-on"
+desc "This gets all tweets, cleans them, and adds them to Accident - to be called by Heroku Scheduler"
 
 task :get_tweets => :environment do
   
@@ -43,11 +43,12 @@ task :get_tweets => :environment do
 	puts "Adding tweets to db..."
 
 	cleaninfo.each do |k,v|
-	#	if Accident.exists?(:tid => k) == false
-	#		Accident.create(:tid => "#{k}", :details => "#{v}", :time => "Do this next")
-	#	counter += 1
-	#	end
-	puts "Key = #{k} and Value = #{v}"
+		if Accident.exists?(:tid => k) == false
+			Accident.create(:tid => "#{k}", :details => "#{v}", :time => "Do this next")
+		counter += 1
+		end
+		#puts "Key = #{k} and Value = #{v}"
+		puts "#{v}"
 	end
 	
 	puts "Done. Records added: #{counter}"
