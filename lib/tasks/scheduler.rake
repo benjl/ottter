@@ -1,5 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
+require 'nexmo'
 
 desc "This gets all tweets, cleans them, and adds them to Accident - to be called by Heroku Scheduler"
 
@@ -52,5 +53,29 @@ task :get_tweets => :environment do
 	end
 	
 	puts "Done. Records added: #{counter}"
+end
 
+desc "Search Accidents for streets in Users and alert the users via SMS"
+
+task :alert_users => :environment do
+
+	nexmo = Nexmo::Client.new('f45ec1ce', '460dfad4')
+	accidents = Accident.find(:all)
+	users = User.find(:all)
+
+	users.each do |user|
+		
+		user_streets = user.streets.split(",").map(&:to_s)
+		
+		accidents.each do |accident|
+			sauce = accident.details
+			user_streets.each do |street|		
+				if sauce.include?(street)
+					puts "Send => #{accident.details} To => #{user.phone}"
+					#nexmo.send_message!({:to => "#{user.phone}", :from => '16136270717', :text => "#{accident.details}"})
+					sleep 2
+				end
+			end
+		end
+	end	
 end
