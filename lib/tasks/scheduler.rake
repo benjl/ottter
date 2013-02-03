@@ -74,8 +74,8 @@ task :alert_users => :environment do
 				user_streets.each do |street|		
 					if sauce.include?(street)
 						puts "Send => #{accident.details} To => #{user.phone}"
-						#nexmo.send_message!({:to => "#{user.phone}", :from => '16136270717', :text => "#{accident.details}"}) #should be using delayed job, should also be a method
-						sleep 2 #replace this with delayed job
+						nexmo.delay.send_message!({:to => "#{user.phone}", :from => '16136270717', :text => "#{accident.details}"}) #should be using delayed job, should also be a method
+						sleep 2
 					end
 				end
 			end
