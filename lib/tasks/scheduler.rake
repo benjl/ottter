@@ -49,7 +49,7 @@ task :get_tweets => :environment do
 		counter += 1
 		end
 		#puts "Key = #{k} and Value = #{v}"
-		puts "#{v}"
+		#puts "#{v}"
 	end
 	
 	puts "Done. Records added: #{counter}"
@@ -60,7 +60,7 @@ desc "Search Accidents for streets in Users and alert the users via SMS"
 task :alert_users => :environment do
 
 	nexmo = Nexmo::Client.new('f45ec1ce', '460dfad4')
-	accidents = Accident.find(:all)
+	accidents = Accident.find(:all, :conditions => { :sms_sent => false})
 	users = User.find(:all)
 
 	users.each do |user|
@@ -69,16 +69,30 @@ task :alert_users => :environment do
 		
 		accidents.each do |accident|
 			sauce = accident.details
-			user_streets.each do |street|		
-				if sauce.include?(street)
-					puts "Send => #{accident.details} To => #{user.phone}"
-					#nexmo.send_message!({:to => "#{user.phone}", :from => '16136270717', :text => "#{accident.details}"}) #should be using delayed job, should also be a method
-					sleep 2 #replace this with delayed job
+			current_accident = Accident.find(accident.id) #these 3 lines can be a method
+			if current_accident.sms_sent == false
+				user_streets.each do |street|		
+					if sauce.include?(street)
+						puts "Send => #{accident.details} To => #{user.phone}"
+						#nexmo.send_message!({:to => "#{user.phone}", :from => '16136270717', :text => "#{accident.details}"}) #should be using delayed job, should also be a method
+						sleep 2 #replace this with delayed job
+					end
 				end
 			end
-			current_accident = Accident.find(accident.id) #these 3 lines can be a method
-			current_accident.sms_sent = "true"
-			current_accident.save
 		end
 	end	
+	
+	accidents.each do |accident|
+		accident.sms_sent = "true"
+		accident.save
+	end
+end
+
+task :reset_sms => :environment do
+	accidents = Accident.find(:all)
+
+	accidents.each do |accident|
+		accident.sms_sent = "false"
+		accident.save
+	end
 end
