@@ -5,6 +5,7 @@
     <th>Tid</th>
     <th>Details</th>
     <th>Time</th>
+    <th>SMS Sent?</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,6 +16,7 @@
     <td><%= accident.tid %></td>
     <td><%= accident.details %></td>
     <td><%= accident.time %></td>
+    <td><%= accident.sms_sent %></td>
     <td><%= link_to 'Show', accident %></td>
     <td><%= link_to 'Edit', edit_accident_path(accident) %></td>
     <td><%= link_to 'Destroy', accident, method: :delete, data: { confirm: 'Are you sure?' } %></td>

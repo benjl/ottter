@@ -65,17 +65,20 @@ task :alert_users => :environment do
 
 	users.each do |user|
 		
-		user_streets = user.streets.split(",").map(&:to_s)
+		user_streets = user.streets.split(",").map(&:to_s) #Loads the User's streets form the db, removes commas and makes them an array
 		
 		accidents.each do |accident|
 			sauce = accident.details
 			user_streets.each do |street|		
 				if sauce.include?(street)
 					puts "Send => #{accident.details} To => #{user.phone}"
-					#nexmo.send_message!({:to => "#{user.phone}", :from => '16136270717', :text => "#{accident.details}"})
-					sleep 2
+					#nexmo.send_message!({:to => "#{user.phone}", :from => '16136270717', :text => "#{accident.details}"}) #should be using delayed job, should also be a method
+					sleep 2 #replace this with delayed job
 				end
 			end
+			current_accident = Accident.find(accident.id) #these 3 lines can be a method
+			current_accident.sms_sent = "true"
+			current_accident.save
 		end
 	end	
 end
