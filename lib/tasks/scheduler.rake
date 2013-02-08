@@ -1,7 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
 require 'nexmo'
-#require '#{File.dirname(__FILE__)}/testing.rb'
 
 desc "This gets all tweets, cleans them, and adds them to Accident - to be called by Heroku Scheduler"
 
@@ -13,8 +12,6 @@ task :get_tweets => :environment do
 		end
 	end
 
-	puts "Getting tweets..." 
-	
 	tweetsxml = Nokogiri::XML(open('https://api.twitter.com/1/statuses/user_timeline.xml?screen_name=1310traffic'))
 	#tweetsxml = Nokogiri::XML(open('https://api.twitter.com/1/statuses/user_timeline.xml?screen_name=benjlcox'))
 	
@@ -25,12 +22,8 @@ task :get_tweets => :environment do
 	cleanid = []
 	counter = 0
 
-	puts "Converting tweets..."
-
 	make_proper_array(rawstatus, cleanstatus)
 	make_proper_array(rawid, cleanid)
-
-	puts "Cleaning tweets..."
 
 	cleanstatus.each do |x|
 		x.gsub!(/^.{9}/, "")
@@ -38,22 +31,14 @@ task :get_tweets => :environment do
 		x[0] = x.first.capitalize[0]
 	end
 
-	puts "Merging tweets with ids..."
-
 	cleaninfo = Hash[cleanid.zip(cleanstatus)]
-
-	puts "Adding tweets to db..."
 
 	cleaninfo.each do |k,v|
 		if Accident.exists?(:tid => k) == false
 			Accident.create(:tid => "#{k}", :details => "#{v}", :time => "Do this next")
 		counter += 1
 		end
-		#puts "Key = #{k} and Value = #{v}"
-		#puts "#{v}"
 	end
-	
-	puts "Done. Records added: #{counter}"
 end
 
 desc "Search Accidents for streets in Users and alert the users via SMS"
@@ -100,9 +85,4 @@ task :reset_sms => :environment do
 		accident.sms_sent = "false"
 		accident.save
 	end
-end
-
-task :test_method => :environment do
-	something = Tester.testing()
-	puts "#{something}"
 end
