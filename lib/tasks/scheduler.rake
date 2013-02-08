@@ -1,6 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
 require 'nexmo'
+#require '#{File.dirname(__FILE__)}/testing.rb'
 
 desc "This gets all tweets, cleans them, and adds them to Accident - to be called by Heroku Scheduler"
 
@@ -58,8 +59,14 @@ end
 desc "Search Accidents for streets in Users and alert the users via SMS"
 
 task :alert_users => :environment do
+	
+	def send_sms (phone, details)
+		nexmo = Nexmo::Client.new('f45ec1ce','460dfad4')
+		puts "Sending => #{details} To => #{phone}"
+		nexmo.delay.send_message!({:to => "#{phone}", :from => '16136270717', :text => "#{details}"}) #should be using delayed job, should also be a method
+	end
 
-	nexmo = Nexmo::Client.new('f45ec1ce', '460dfad4')
+
 	accidents = Accident.find(:all, :conditions => { :sms_sent => false})
 	users = User.find(:all)
 
@@ -69,13 +76,11 @@ task :alert_users => :environment do
 		
 		accidents.each do |accident|
 			sauce = accident.details
-			current_accident = Accident.find(accident.id) #these 3 lines can be a method
+			current_accident = Accident.find(accident.id) 
 			if current_accident.sms_sent == false
 				user_streets.each do |street|		
 					if sauce.include?(street)
-						puts "Send => #{accident.details} To => #{user.phone}"
-						nexmo.delay.send_message!({:to => "#{user.phone}", :from => '16136270717', :text => "#{accident.details}"}) #should be using delayed job, should also be a method
-						sleep 2
+						send_sms(user.phone,accident.details)
 					end
 				end
 			end
@@ -95,4 +100,9 @@ task :reset_sms => :environment do
 		accident.sms_sent = "false"
 		accident.save
 	end
+end
+
+task :test_method => :environment do
+	something = Tester.testing()
+	puts "#{something}"
 end

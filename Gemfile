@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
 gem 'nokogiri'
-gem 'nexmo'
+gem 'nexmo', :git => "git://github.com/benjl/nexmo.git"
 gem 'delayed_job_active_record'
 
 # Bundle edge Rails instead:

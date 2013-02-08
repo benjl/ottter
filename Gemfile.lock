@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/benjl/nexmo.git
+  revision: e18a94b7540799b34fefb3a1a4a307262972d9e6
+  specs:
+    nexmo (1.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -58,7 +64,6 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.19)
     multi_json (1.5.0)
-    nexmo (1.0.0)
     nokogiri (1.5.5)
     pg (0.12.2)
     polyglot (0.3.3)
@@ -114,7 +119,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   delayed_job_active_record
   jquery-rails
-  nexmo
+  nexmo!
   nokogiri
   pg
   rails (= 3.2.8)
