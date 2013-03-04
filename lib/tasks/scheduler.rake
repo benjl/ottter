@@ -48,11 +48,11 @@ task :alert_users => :environment do
 	def send_sms (phone, details)
 		nexmo = Nexmo::Client.new('f45ec1ce','460dfad4')
 		puts "Sending => #{details} To => #{phone}"
-		nexmo.delay.send_message!({:to => "#{phone}", :from => '16136270717', :text => "#{details}"}) #should be using delayed job, should also be a method
+		nexmo.delay.send_message!({:to => "#{phone}", :from => '16136270717', :text => "#{details}"})
 	end
 
 
-	accidents = Accident.find(:all, :conditions => { :sms_sent => false})
+	accidents = Accident.find(:all, :conditions => {:sms_sent => false})
 	users = User.find(:all)
 
 	users.each do |user|
