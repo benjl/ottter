@@ -35,8 +35,7 @@ task :get_tweets => :environment do
 
 	cleaninfo.each do |k,v|
 		if Accident.exists?(:tid => k) == false
-			Accident.delay.create(:tid => "#{k}", :details => "#{v}", :time => "Do this next")
-		counter += 1
+			Accident.create(:tid => "#{k}", :details => "#{v}", :time => "Do this next")
 		end
 	end
 end

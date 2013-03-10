@@ -27,7 +27,12 @@
 
 <p>
   <b>Path</b>
-  <%= get_directions(@user.street_orig,@user.street_dest) %>
+  <% streets = get_directions(@user.street_orig,@user.street_dest) %>
+  <ul>
+    <% streets.each do |street| %>
+      <li><%= street %></li>
+    <% end %>
+  </ul>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
