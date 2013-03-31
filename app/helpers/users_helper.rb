@@ -15,14 +15,12 @@ module UsersHelper
 
 		query['routes'][0]['legs'][0]['steps'].each do |step|
 			check = strip_tags(step.fetch('html_instructions'))
-			puts check
 			roads.each do |road|
 				if check.include?(road)
 					result.push(road)
 				end
 			end
 		end
-
 		result.uniq
 	end
 

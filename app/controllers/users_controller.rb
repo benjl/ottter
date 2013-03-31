@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     @user = User.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html   
       format.json { render json: @user }
     end
   end
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { render action: "edit" }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }

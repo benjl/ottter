@@ -51,6 +51,8 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    haml (4.0.1)
+      tilt
     hike (1.2.1)
     i18n (0.6.2)
     journey (1.0.4)
@@ -119,6 +121,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
   delayed_job_active_record
+  haml
   jquery-rails
   nexmo!
   nokogiri

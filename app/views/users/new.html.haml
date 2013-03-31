@@ -1,0 +1,29 @@
+=form_for(@user) do |f|
+	%form{ :action => "", :remote => true, :method => "post"}
+		#step1
+			.field
+				= f.label :name
+				= f.text_field :name
+			.field
+				= f.label :email
+				= f.text_field :email
+			.button
+				%input{:type => "button", :id => 'button1', :value => "Next", :class => "button"}
+		#step2{:style =>"display: none;"}
+			.field
+				= f.label :phone
+				= f.text_field :phone
+			.button
+				%input{:type => "button",:id => 'button2', :value => "Next", :class => "button"}
+		#step3{:style =>"display: none;"}
+			.field
+				= f.label :street_orig
+				= f.text_field :street_orig
+			.field
+				= f.label :street_dest
+				= f.text_field :street_dest
+			.button
+				%input{:type => "button",:id => 'button3', :value => "Next", :class => "button"}
+		#step4{:style =>"display: none;"}
+			.button
+				%input{:type => "submit", :value => "Send", :class => "button"}
