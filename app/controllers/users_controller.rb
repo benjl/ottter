@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  respond_to :html,:xml,:json
+
   # GET /users
   # GET /users.json
   def index
@@ -41,14 +43,25 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-
-    respond_to do |format|
-      if @user.save
-        format.html { render action: "edit" }
-        format.json { render json: @user, status: :created, location: @user }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+    if @user.save
+      respond_with do |format|
+        format.html do
+          if request.xhr?
+            render :partial => "users/confirm", :locals => { :user => @user }, :layout => false, :status => :created
+          else
+            redirect_to @user
+          end
+        end
+      end
+    else
+      respond_with do |format|
+        format.html do
+          if request.xhr?
+            render :json => @users.errors, :status => :unprocessable_entity
+          else
+            render :action => :new, :status => :unprocessable_entity
+          end
+        end
       end
     end
   end
