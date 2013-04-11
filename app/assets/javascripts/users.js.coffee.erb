@@ -1,0 +1,34 @@
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+
+setTarget = ->
+	tmp = ""
+	$(".streetfield").each ->
+  		tmp += $(this).val() + ","
+  	tmp = tmp.slice(0,-1)
+  	$('#pathfield').val(tmp)
+$ ->
+	$("#street_text_fields").focusout ->
+    	setTarget()
+	
+jQuery ->
+	$('#button1').click ->
+		$('#step2').toggle('slow')
+	$('#button2').click ->
+		$('#step3').toggle('slow')
+	$('#button3').click ->
+		$('#step4').toggle('slow')
+	$('#new_link').click ->
+		$('#street_text_fields').append "<div class='each_street'> <input class='streetfield' type='text'/> <a class='kill_link'> X </a> </div>"
+		setTarget()
+	$('#street_text_fields').on 'click','.kill_link', ->
+		$(this).parent().remove()
+		setTarget()
+
+
+
+
+
+
+	

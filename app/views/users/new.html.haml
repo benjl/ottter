@@ -1,4 +1,4 @@
-=form_for @user, :remote => true, :html => { :'data-type' => 'html', :id => 'create_user_form' } do |f|
+=form_for @user do |f|
 	#step1
 		.field
 			= f.label :name
@@ -21,10 +21,12 @@
 		.field
 			= f.label :street_dest
 			= f.text_field :street_dest
+			= f.hidden_field :path
 		.button
 			%input{:type => "button",:id => 'button3', :value => "Next", :class => "button"}
 	#step4{:style =>"display: none;"}
 		.button
 			%input{:type => "submit", :value => "Send", :class => "button", :id =>"submitbtn"}
 	.validation-error
-#confirm
+
+
