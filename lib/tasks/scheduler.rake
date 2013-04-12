@@ -20,22 +20,23 @@ task :get_tweets => :environment do
 	
 	cleanstatus = []
 	cleanid = []
-	counter = 0
 
 	make_proper_array(rawstatus, cleanstatus)
 	make_proper_array(rawid, cleanid)
 
-	cleanstatus.each do |x|
-		x.gsub!(/^.{9}/, "")
-		x.gsub!(/\s[#].+$/, "")
-		x[0] = x.first.capitalize[0]
-	end
-
 	cleaninfo = Hash[cleanid.zip(cleanstatus)]
+
+	cleaninfo.delete_if{|k,v| !v.match(/^Ottawa -/)}
+
+	cleaninfo.each do |k,v|
+		v.gsub!(/^.{9}/, "")
+		v.gsub!(/\s[#].+$/, "")
+		v[0] = v.first.capitalize[0]
+	end
 
 	cleaninfo.each do |k,v|
 		if Accident.exists?(:tid => k) == false
-			Accident.create(:tid => "#{k}", :details => "#{v}", :time => "Do this next")
+			Accident.create(:tid => "#{k}", :details => "#{v}", :time => "#{Time.now.to_i}")
 		end
 	end
 end
@@ -47,7 +48,7 @@ task :alert_users => :environment do
 	def send_sms (phone, details)
 		nexmo = Nexmo::Client.new('f45ec1ce','460dfad4')
 		puts "Sending => #{details} To => #{phone}"
-		nexmo.delay.send_message!({:to => "#{phone}", :from => '16136270717', :text => "#{details}"})
+		nexmo.delay.send_message!({:to => "#{phone}", :from => '16136270717', :text => "#{details}", :sleep => 2})
 	end
 
 

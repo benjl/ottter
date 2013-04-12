@@ -11,14 +11,14 @@
 				<input class='streetfield' type='text' value="#{street}"/>
 				%a{:class => "kill_link"} X
 
-%a{:id => "new_link"} Add New Street
+%a{:id => "new_link", :class => 'button'} Add New Street
 
 =form_for(@user) do |f|
 	#showinfo
 		.field
 			= f.text_field :path, :value => patharr.join(","), :id => 'pathfield'
-		.button
-			%input{:type => "submit", :value => "Send", :class => "button"}
+		.button_div
+			%input{:type => "submit", :value => "Send", :class => "button", :id => "send"}
 
 
 

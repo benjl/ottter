@@ -1,32 +1,36 @@
+-if @user.errors.any?
+	- @user.errors.full_messages.each do |msg|
+		%li= msg
+
 =form_for @user do |f|
-	#step1
+	.step{:id => 'step1'}
 		.field
-			= f.label :name
+			%label{:class => 'label'}Name
+			<br>
 			= f.text_field :name
 		.field
-			= f.label :email
+			%label{:class => 'label'}Email
+			<br>
 			= f.text_field :email
-		.button
+		.button_div
 			%input{:type => "button", :id => 'button1', :value => "Next", :class => "button"}
-	#step2{:style =>"display: none;"}
+	.step{:id => 'step2'}
 		.field
-			= f.label :phone
+			%label{:class => 'label'}Phone #
+			<br>
 			= f.text_field :phone
-		.button
+		.button_div
 			%input{:type => "button",:id => 'button2', :value => "Next", :class => "button"}
-	#step3{:style =>"display: none;"}
+	.step{:id => 'step3'}
 		.field
-			= f.label :street_orig
+			%label{:class => 'label'}Origin (Home)
+			<br>
 			= f.text_field :street_orig
 		.field
-			= f.label :street_dest
+			%label{:class => 'label'}Destination (Work)
+			<br>
 			= f.text_field :street_dest
 			= f.hidden_field :path
-		.button
-			%input{:type => "button",:id => 'button3', :value => "Next", :class => "button"}
-	#step4{:style =>"display: none;"}
-		.button
+		.button_div
 			%input{:type => "submit", :value => "Send", :class => "button", :id =>"submitbtn"}
-	.validation-error
-
 

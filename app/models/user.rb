@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :name, :phone, :street_orig, :street_dest, :path
 
-  #validates :streets, :presence => true 
+  validates :name,:name,:phone,:street_orig,:street_dest,:path, :presence => true
+
+  validates :email,:phone, :uniqueness => true
 
 end

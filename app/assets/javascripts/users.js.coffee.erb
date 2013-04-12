@@ -5,25 +5,31 @@
 setTarget = ->
 	tmp = ""
 	$(".streetfield").each ->
-  		tmp += $(this).val() + ","
+  		tmp += $(this).val().replace(/[^a-z0-9],./gi, "") + ","
+  		if $(this).val() == "ON-417" 
+		    tmp += 'Queensway,Hwy 417,'
   	tmp = tmp.slice(0,-1)
+
   	$('#pathfield').val(tmp)
+
 $ ->
 	$("#street_text_fields").focusout ->
     	setTarget()
-	
+
 jQuery ->
 	$('#button1').click ->
-		$('#step2').toggle('slow')
+		$('#step2').fadeIn()
+		$('#button1').hide()
 	$('#button2').click ->
-		$('#step3').toggle('slow')
-	$('#button3').click ->
-		$('#step4').toggle('slow')
+		$('#step3').fadeIn()
+		$('#button2').hide()
 	$('#new_link').click ->
 		$('#street_text_fields').append "<div class='each_street'> <input class='streetfield' type='text'/> <a class='kill_link'> X </a> </div>"
 		setTarget()
 	$('#street_text_fields').on 'click','.kill_link', ->
 		$(this).parent().remove()
+		setTarget()
+	$('#send').click ->
 		setTarget()
 
 
