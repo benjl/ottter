@@ -57,7 +57,7 @@ task :alert_users => :environment do
 
 	users.each do |user|
 		
-		user_streets = user.streets.split(",").map(&:to_s) #Loads the User's streets form the db, removes commas and makes them an array
+		user_streets = user.path.split(",").map(&:to_s) #Loads the User's streets form the db, removes commas and makes them an array
 		
 		accidents.each do |accident|
 			sauce = accident.details
