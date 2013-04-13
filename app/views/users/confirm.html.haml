@@ -1,0 +1,21 @@
+- patharr = get_directions(@user.street_orig,@user.street_dest)
+- error = ''
+
+#street_text_fields
+	-if patharr[0].nil?
+		.error
+			We could not find your address
+	-else
+		-patharr.each do |street|
+			.each_street
+				<input class='streetfield' type='text' value="#{street}"/>
+				%a{:class => "kill_link"} X
+
+%a{:id => "new_link", :class => 'button'} Add New Street
+
+=form_for(@user) do |f|
+	#showinfo
+		.field
+			= f.text_field :path, :value => patharr.join(","), :id => 'pathfield'
+		.button_div
+			%input{:type => "submit", :value => "Send", :class => "button", :id => "send"}
