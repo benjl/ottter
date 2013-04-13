@@ -17,6 +17,19 @@ li{
 	background-color: #FFFFFF;
 }
 
+select{
+	border: none;
+	font-size: 30px;
+	height:auto;
+	width:auto;
+	background-color: none;
+	outline: none;
+}
+select:hover{
+	background-color: #FF007C;
+	color: #FFFFFF;
+}
+
 .step{
 	width: 400px;
 	margin:20px auto 0px auto;
@@ -39,6 +52,14 @@ li{
 	color: #FFFFFF;
 }
 
+p{
+	font-size: 1.25em;
+}
+.text{
+	line-height: normal;
+	margin: 10px;
+}
+
 .button{
 	border: 2px solid #FF007C;
 	background-color: #FF007C;
@@ -52,6 +73,30 @@ li{
 .button:hover{
 	background-color: #FFFFFF;
 	color: #FF007C;
+}
+
+.inactive{
+	border: 2px solid #696969;
+	background-color: #696969;
+	color: #FFFFFF;
+	font-size: 1.25em;
+	height: auto;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+.inactive:hover{
+	background-color: #FFFFFF;
+	color: #696969;
+}
+
+.yes{
+	border: 2px solid #00FF00;
+	background-color: #00FF00;
+}
+.yes:hover{
+	background-color: #FFFFFF;
+	color:#00FF00;
 }
 
 input{
@@ -85,10 +130,6 @@ input:focus{
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
-#step2{
-	display: none;
-}
-
-#step3{
+#step2, #step3, #sched, #sens, #end, #sched_act, #sched_chk_dv, #sens_chk_dv{
 	display: none;
 }

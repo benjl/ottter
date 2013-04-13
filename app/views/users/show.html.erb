@@ -30,6 +30,35 @@
   <%= @user.path %>
 </p>
 
+<p>
+  <b>Sched</b>
+  <%= @user.sched %>
+</p>
+
+<p>
+  <b>Sens</b>
+  <%= @user.sens %>
+</p>
+
+<p>
+  <b>Sched Mor Start</b>
+  <%= @user.sched_mor_start %>
+</p>
+
+<p>
+  <b>Sched Mor End</b>
+  <%= @user.sched_mor_end %>
+</p>
+
+<p>
+  <b>Sched Eve Start</b>
+  <%= @user.sched_eve_start %>
+</p>
+
+<p>
+  <b>Sched Eve End</b>
+  <%= @user.sched_eve_end %>
+</p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', root_path %>

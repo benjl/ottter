@@ -38,6 +38,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+# GET /users/1/confirm
+  def confirm
+    @user = User.find(params[:id])
+  end
+
   # POST /users
   # POST /users.json
   def create

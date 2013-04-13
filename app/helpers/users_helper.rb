@@ -35,7 +35,13 @@ module UsersHelper
 			result.uniq
 		end
 	end
-
+	def get_times()
+		arr = ['12:00']
+		(1..11).each do |hour|
+			arr.push(hour.to_s + ":00")
+		end
+		arr
+	end
 end
 
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130303163639) do
+ActiveRecord::Schema.define(:version => 20130413190909) do
 
   create_table "accidents", :force => true do |t|
     t.integer  "tid"
@@ -42,11 +42,17 @@ ActiveRecord::Schema.define(:version => 20130303163639) do
     t.string   "name"
     t.string   "email"
     t.string   "phone"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "street_dest"
     t.string   "street_orig"
     t.string   "path"
+    t.boolean  "sens"
+    t.boolean  "sched"
+    t.integer  "sched_mor_start"
+    t.integer  "sched_mor_end"
+    t.integer  "sched_eve_start"
+    t.integer  "sched_eve_end"
   end
 
 end

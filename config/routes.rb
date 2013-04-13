@@ -3,7 +3,7 @@ Ottter::Application.routes.draw do
 
   resources :users
 
-  root :to => 'welcome#index'
+  root :to => 'welcomew#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -11,7 +11,7 @@ Ottter::Application.routes.draw do
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
-  match 'users/:id/confirm' => 'users#edit', :as => :confirm
+  match 'users/:id/confirm' => 'users#confirm', :as => :confirm
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase

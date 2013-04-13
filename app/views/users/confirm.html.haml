@@ -11,11 +11,48 @@
 				<input class='streetfield' type='text' value="#{street}"/>
 				%a{:class => "kill_link"} X
 
-%a{:id => "new_link", :class => 'button'} Add New Street
+#add_street_button
+	%a{:id => "new_link", :class => 'button'} Add New Street
 
 =form_for(@user) do |f|
-	#showinfo
+	.step{:id => 'showinfo'}
 		.field
 			= f.text_field :path, :value => patharr.join(","), :id => 'pathfield'
+		
+		.button_div
+			%input{:type => "button",:id => 'button3', :value => "Next", :class => "button"}			
+	.step{:id => 'sched'}
+		.text
+			Would you like to schedule morning and evening times for your text alerts?
+		.button_div
+			%input{:type => "button",:id => 'button4yes', :value => "Yes", :class => "button yes"}
+			%input{:type => "button",:id => 'button4no', :value => "No", :class => "button"}
+		#sched_chk_dv
+			= f.check_box :sched, :id => 'sched_checkbox'
+	.step{:id => 'sched_act'}
+		.text
+			Morning commute:
+		.field
+			= f.select :sched_mor_start, get_times(), :class => 'drop_down'
+			AM
+			= f.select :sched_mor_end, get_times()
+			AM
+		.text
+			Evening commute:
+		.field
+			= f.select :sched_eve_start, get_times()
+			PM
+			= f.select :sched_eve_end, get_times()
+			PM
+		.button_div
+			%input{:type => "button",:id => 'done_sched', :value => "Next", :class => "button"}
+	.step{:id => 'sens'}
+		.text
+			Would you like to be alerted of Sens home games?
+		.button_div
+			%input{:type => "button",:id => 'button5yes', :value => "Yes", :class => "button yes"}
+			%input{:type => "button",:id => 'button5no', :value => "No", :class => "button"}
+		#sens_chk_dv
+			= f.check_box :sens, :id => 'sens_checkbox'
 		.button_div
 			%input{:type => "submit", :value => "Send", :class => "button", :id => "send"}
