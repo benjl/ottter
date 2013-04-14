@@ -29,9 +29,6 @@ jQuery ->
 	$('#button3').click ->
 		$('#sched').fadeIn()
 		$('#button3').hide()
-		$("html, body").animate
-  			scrollTop: $("#button4yes").offset().top
-		, 2000
 
 	$('#button4no').click ->
 		$('#sens').fadeIn()
@@ -45,9 +42,6 @@ jQuery ->
 		$('#sched_checkbox').prop "checked", true
 		$('#button4no').removeClass('button')
 		$('#button4no').addClass('inactive')
-		$("html, body").animate
-  			scrollTop: $("#button4yes").offset().top
-		, 2000
 
 	$('#done_sched').click ->
 		$('#sens').fadeIn()

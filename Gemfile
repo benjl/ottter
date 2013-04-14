@@ -24,6 +24,7 @@ end
 
 group :production do
   gem 'pg'
+  gem 'jquery-rails'
 end
 
 gem 'jquery-rails'
