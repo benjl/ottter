@@ -8,6 +8,8 @@ setTarget = ->
   		tmp += $(this).val().replace(/[^a-z0-9],./gi, "") + ","
   		if $(this).val() == "ON-417" 
 		    tmp += 'Queensway,Hwy 417,'
+		if $(this).val() == "ON-416" 
+		    tmp += 'Hwy 416,'
   	tmp = tmp.slice(0,-1)
 
   	$('#pathfield').val(tmp)
@@ -29,9 +31,6 @@ jQuery ->
 	$('#button3').click ->
 		$('#sched').fadeIn()
 		$('#button3').hide()
-		$("html, body").animate
-  			scrollTop: $("#button4yes").offset().top
-		, 2000
 
 	$('#button4no').click ->
 		$('#sens').fadeIn()
@@ -39,18 +38,12 @@ jQuery ->
 		$('#button4yes').removeClass('yes')
 		$('#button4yes').removeClass('button')
 		$('#button4yes').addClass('inactive')
-		$("html, body").animate
-  			scrollTop: $("#send").offset().top
-		, 2000
 
 	$('#button4yes').click ->
 		$('#sched_act').fadeIn()
 		$('#sched_checkbox').prop "checked", true
 		$('#button4no').removeClass('button')
 		$('#button4no').addClass('inactive')
-		$("html, body").animate
-  			scrollTop: $("#send").offset().top
-		, 2000
 
 	$('#done_sched').click ->
 		$('#sens').fadeIn()
@@ -67,7 +60,6 @@ jQuery ->
 		$('#sens_checkbox').prop "checked", true
 		$('#button5no').removeClass('button')
 		$('#button5no').addClass('inactive')
-
 
 	$('#new_link').click ->
 		$('#street_text_fields').append "<div class='each_street'> <input class='streetfield' type='text'/> <a class='kill_link'> X </a> </div>"
