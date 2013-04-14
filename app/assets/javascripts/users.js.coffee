@@ -65,7 +65,7 @@ jQuery ->
 		setTarget()
 
 	$('#street_text_fields').on 'click','.kill_link', ->
-		$(this).parent().remove()
+		#$(this).parent().remove()
 		setTarget()
 
 	$('#send').click ->
