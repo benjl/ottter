@@ -66,10 +66,6 @@ setTarget = ->
 
   	$('#pathfield').val(tmp)
 
-$ ->
-	setTarget()
-	$("#street_text_fields").focusout ->
-    	setTarget()
 
 
 
