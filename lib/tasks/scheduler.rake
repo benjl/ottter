@@ -51,21 +51,45 @@ task :alert_users => :environment do
 		nexmo.delay.send_message!({:to => "#{phone}", :from => '16136270717', :text => "#{details}", :sleep => 2})
 	end
 
+	def can_send(user)
+		time = Time.now.strftime("%k").to_i
+
+		if user.sched
+			if time <= 11
+				if user.sched_mor_start <= time && user.sched_mor_end >= time
+					return true
+				end
+			elsif time >= 12
+				if user.sched_eve_start <= time && user.sched_eve_end >= time
+					return true
+				end
+			else
+				return false
+				console.log("INVALID TIME, USER => #{user.id}")
+			end
+		else
+			return false
+		end
+	end
 
 	accidents = Accident.find(:all, :conditions => {:sms_sent => false})
 	users = User.find(:all)
 
+
 	users.each do |user|
 		
-		user_streets = user.path.split(",").map(&:to_s) #Loads the User's streets from the db, removes commas and makes them an array
-		
-		accidents.each do |accident|
-			sauce = accident.details
-			current_accident = Accident.find(accident.id) 
-			if current_accident.sms_sent == false
-				user_streets.each do |street|		
-					if sauce.include?(street)
-						send_sms(user.phone,accident.details)
+		if can_send(user)
+
+			user_streets = user.path.split(",").map(&:to_s) #Loads the User's streets from the db, removes commas and makes them an array
+			
+			accidents.each do |accident|
+				sauce = accident.details
+				current_accident = Accident.find(accident.id) 
+				if current_accident.sms_sent == false
+					user_streets.each do |street|		
+						if sauce.include?(street)
+							send_sms(user.phone,accident.details)
+						end
 					end
 				end
 			end
@@ -76,6 +100,21 @@ task :alert_users => :environment do
 		accident.sms_sent = "true"
 		accident.save
 	end
+end
+
+task :send_sens_alert => :environment do
+	def send_sms (phone, details)
+		nexmo = Nexmo::Client.new('f45ec1ce','460dfad4')
+		puts "Sending => #{details} To => #{phone}"
+		nexmo.delay.send_message!({:to => "#{phone}", :from => '16136270717', :text => "#{details}", :sleep => 2})
+	end
+
+	users.each do |user|
+		if user.sens
+			send_sms(user.phone,"Heads up on the drive home tonight, there's a Sens home game!")
+		end
+	end
+
 end
 
 task :reset_sms => :environment do
