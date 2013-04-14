@@ -2,21 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-setTarget = ->
-	tmp = ""
-	$(".streetfield").each ->
-  		tmp += $(this).val().replace(/[^a-z0-9],./gi, "") + ","
-  		if $(this).val() == "ON-417" 
-		    tmp += 'Queensway,Hwy 417,'
-  	tmp = tmp.slice(0,-1)
-
-  	$('#pathfield').val(tmp)
-
-$ ->
-	setTarget()
-	$("#street_text_fields").focusout ->
-    	setTarget()
-
 jQuery ->
 	$('#button1').click ->
 		$('#step2').fadeIn()
@@ -71,7 +56,20 @@ jQuery ->
 	$('#send').click ->
 		setTarget()
 
+setTarget = ->
+	tmp = ""
+	$(".streetfield").each ->
+  		tmp += $(this).val().replace(/[^a-z0-9],./gi, "") + ","
+  		if $(this).val() == "ON-417" 
+		    tmp += 'Queensway,Hwy 417,'
+  	tmp = tmp.slice(0,-1)
 
+  	$('#pathfield').val(tmp)
+
+$ ->
+	setTarget()
+	$("#street_text_fields").focusout ->
+    	setTarget()
 
 
 
