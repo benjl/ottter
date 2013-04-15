@@ -54,7 +54,7 @@ task :alert_users => :environment do
 	def can_send(user)
 		time = Time.now.strftime("%k").to_i
 
-		if user.sched
+		if user.sched #this is horrible, horribly broken. It doesn't even text people that chose not to schedule! Needs to be made a method. 
 			if time <= 11
 				if user.sched_mor_start <= time && user.sched_mor_end >= time
 					return true
