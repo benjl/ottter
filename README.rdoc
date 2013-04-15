@@ -8,8 +8,4 @@ Texting is done using the Nexmo API and a forked version of its Ruby wrapper. Ne
 
 Route determination is currently in the works using the Google Maps API and a comprehensive list of arterial Ottawa roads pulled from Wikipedia. The next steps would be to add the ability for the user to edit the route that Google Maps determined (to reflect their actual route) and save that to their user record. 
 
-The final two features to be added are the ability to set times when texts should be sent (i.e. when you go to work and return home, with a bit of added time on each end so the info is actually useful) and the ability to edit and delete your account. 
-
-No work has been done on the layout/style so that will need to be done too. 
-
 Overall, this app (as it stands) violates the Google Maps TOS, maybe the Twitter TOS, and possible even Canadian copyright law (not sure if Tweets are copyrighted or not - seems to be a grey area). A commercial, or even public version, would be a long ways out but that was never the end goal of the app. Learning and creating a tool for my own personal usage is the immediate goal.
