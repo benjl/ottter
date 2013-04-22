@@ -31,6 +31,7 @@ end
 gem 'sass-rails',   '~> 3.2.3'
 gem 'coffee-rails', '~> 3.2.1'
 gem 'haml'
+gem "bcrypt-ruby", :require => "bcrypt"
 
   
 # To use ActiveModel has_secure_password

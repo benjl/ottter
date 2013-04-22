@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
 
+  before_filter :save_login_state, :only => [:new, :create]
+
+
   # GET /users
   # GET /users.json
   def index
@@ -51,6 +54,7 @@ class UsersController < ApplicationController
       if @user.save
         format.html { redirect_to confirm_path(@user), notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
+        session[:user_id] = @user.id
       else
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -65,10 +69,10 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to "/login", notice: 'Congrats. Your profile successfully created/updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: "confirm" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -81,7 +85,7 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to root_url }
+      format.html { redirect_to "/users#index" }
       format.json { head :no_content }
     end
   end

@@ -2,8 +2,6 @@
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Email</th>
     <th>Phone</th>
     <th>Street Origin</th>
     <th>Street Dest</th>
@@ -14,15 +12,13 @@
 
 <% @users.each do |user| %>
   <tr>
-    <td><%= user.name %></td>
-    <td><%= user.email %></td>
     <td><%= user.phone %></td>
     <td><%= user.street_orig %></td>
     <td><%= user.street_dest %></td>
     <td><%= user.path %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= button_to 'Destroy', user, :method => :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

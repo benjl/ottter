@@ -1,9 +1,21 @@
 Ottter::Application.routes.draw do
+
   resources :accidents
 
   resources :users
 
+
+  match "login", :to => "sessions#login"
+  match "signup", :to => "users#new"
+  match "logout", :to => "sessions#logout"
+  match "home", :to => "sessions#home"
+  match "profile", :to => "sessions#profile"
+  match "settings", :to => "sessions#settings"
+  match "login_attempt", :to => "sessions#login_attempt"
+
   root :to => 'users#new'
+
+  match 'users/:id/confirm' => 'users#confirm', :as => :confirm
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -11,7 +23,7 @@ Ottter::Application.routes.draw do
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
-  match 'users/:id/confirm' => 'users#confirm', :as => :confirm
+
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase

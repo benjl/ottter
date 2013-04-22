@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130413190909) do
+ActiveRecord::Schema.define(:version => 20130420135156) do
 
   create_table "accidents", :force => true do |t|
     t.integer  "tid"
@@ -39,11 +39,9 @@ ActiveRecord::Schema.define(:version => 20130413190909) do
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "users", :force => true do |t|
-    t.string   "name"
-    t.string   "email"
     t.string   "phone"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.string   "street_dest"
     t.string   "street_orig"
     t.string   "path"
@@ -53,6 +51,8 @@ ActiveRecord::Schema.define(:version => 20130413190909) do
     t.integer  "sched_mor_end"
     t.integer  "sched_eve_start"
     t.integer  "sched_eve_end"
+    t.string   "encrypted_password"
+    t.string   "salt"
   end
 
 end

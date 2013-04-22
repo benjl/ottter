@@ -1,3 +1,6 @@
+.banner
+	%h1 Sign Up
+
 -if @user.errors.any?
 	- @user.errors.full_messages.each do |msg|
 		%li= msg
@@ -5,30 +8,30 @@
 =form_for @user do |f|
 	.step{:id => 'step1'}
 		.field
-			%label{:class => 'label'}Name
-			<br>
-			= f.text_field :name
-		.field
-			%label{:class => 'label'}Email
-			<br>
-			= f.text_field :email
+			%label{:class => 'label'}Phone #
+			%br
+			= f.text_field :phone
 		.button_div
 			%input{:type => "button", :id => 'button1', :value => "Next", :class => "button"}
 	.step{:id => 'step2'}
 		.field
-			%label{:class => 'label'}Phone #
-			<br>
-			= f.text_field :phone
+			%label{:class => 'label'}Password
+			%br
+			= f.password_field :password
+		.field
+			%label{:class => 'label'}Confirm Password
+			%br
+			= f.password_field :password_confirmation
 		.button_div
 			%input{:type => "button",:id => 'button2', :value => "Next", :class => "button"}
 	.step{:id => 'step3'}
 		.field
 			%label{:class => 'label'}Origin (Home)
-			<br>
+			%br
 			= f.text_field :street_orig
 		.field
 			%label{:class => 'label'}Destination (Work)
-			<br>
+			%br
 			= f.text_field :street_dest
 			= f.hidden_field :path
 		.button_div

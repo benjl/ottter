@@ -1,4 +1,4 @@
-jQuery ->
+$ ->
 	$('#button1').click ->
 		$('#step2').fadeIn()
 		$('#button1').hide()
@@ -40,19 +40,24 @@ jQuery ->
 		$('#button5no').removeClass('button')
 		$('#button5no').addClass('inactive')
 
-
 	$('#new_link').click ->
 		$('#street_text_fields').append "<div class='each_street'> <input class='streetfield' type='text'/> <a class='kill_link'> X </a> </div>"
-		setTarget()
-
-	$('#street_text_fields').on 'click','.kill_link', ->
-		$(this).parent().remove()
-		setTarget()
+		redoSreets()
 
 	$('#send').click ->
-		setTarget()
+		redoSreets()
 
-setTarget = ->
+	$("#street_text_fields").focusout ->
+	    redoSreets()
+
+$('#street_text_fields').on 'click','.kill_link', ->
+	$(this).parent().remove()
+	redoSreets()
+
+ $ ->
+	redoSreets()
+	
+redoSreets = ->
 	tmp = ""
 	$(".streetfield").each ->
   		tmp += $(this).val().replace(/[^a-z0-9],./gi, "") + ","
@@ -61,13 +66,6 @@ setTarget = ->
   	tmp = tmp.slice(0,-1)
 
   	$('#pathfield').val(tmp)
-  	
- $ ->
-	setTarget()
-	$("#street_text_fields").focusout ->
-    	setTarget()
-
-
 
 
 

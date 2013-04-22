@@ -95,7 +95,7 @@ p{
 	border: 2px solid #00FF00;
 	background-color: #00FF00;
 }
-.yes:hover1	{
+.yes:hover	{
 	background-color: #FFFFFF;
 	color:#00FF00;
 }
@@ -131,6 +131,6 @@ input:focus{
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
-#step2, #step3, #sched, #sens, #end, #sched_act, #sched_chk_dv, #sens_chk_dv{
+#step2, #step3, #sched, #sens, #end, #sched_act{
 	display: none;
 }

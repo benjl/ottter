@@ -1,18 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
-  <%= @user.name %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
-
-<p>
   <b>Phone:</b>
   <%= @user.phone %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%= @user.encrypted_password %>
+</p>
+
+<p>
+  <b>Salt:</b>
+  <%= @user.salt %>
 </p>
 
 <p>

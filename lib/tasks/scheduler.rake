@@ -72,27 +72,32 @@ task :alert_users => :environment do
 		end
 	end
 
-	accidents = Accident.find(:all, :conditions => {:sms_sent => false})
-	users = User.find(:all)
-
-
-	users.each do |user|
-		
-		if can_send(user)
-
-			user_streets = user.path.split(",").map(&:to_s) #Loads the User's streets from the db, removes commas and makes them an array
-			
-			accidents.each do |accident|
-				sauce = accident.details
-				current_accident = Accident.find(accident.id) 
-				if current_accident.sms_sent == false
-					user_streets.each do |street|		
-						if sauce.include?(street)
-							send_sms(user.phone,accident.details)
-						end
+	def accdnt_msgs(user,accidents)
+		user_streets = user.path.split(",").map(&:to_s) #Loads the User's streets from the db, removes commas and makes them an array
+				
+		accidents.each do |accident|
+			sauce = accident.details
+			current_accident = Accident.find(accident.id) 
+			if current_accident.sms_sent == false
+				user_streets.each do |street|		
+					if sauce.include?(street)
+						send_sms(user.phone,accident.details)
 					end
 				end
 			end
+		end
+	end
+
+	accidents = Accident.find(:all, :conditions => {:sms_sent => false})
+	users = User.find(:all)
+
+	users.each do |user|
+		if user.sched
+			if can_send(user)
+				accdnt_msgs(user,accidents)
+			end
+		else
+			accdnt_msgs(user,accidents)
 		end
 	end	
 	
