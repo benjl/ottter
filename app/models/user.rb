@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   after_save :clear_password
 
 	def match_password(login_password="")
-		encrypted_password == BCrypt::Engine.hash_secret(login_password, salt)
+		encrypted_password === BCrypt::Engine.hash_secret(login_password, salt)
 	end
 
 	def self.authenticate(phone="", login_password="")
@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
 	def encrypt_password
 		 if password.present?
 			self.salt = BCrypt::Engine.generate_salt
-			self.encrypted_password= BCrypt::Engine.hash_secret(password, salt)
+			self.encrypted_password = BCrypt::Engine.hash_secret(password, salt)
 		end
 	end
 
