@@ -48,7 +48,7 @@ task :alert_users => :environment do
 	def send_sms (phone, details)
 		nexmo = Nexmo::Client.new('f45ec1ce','460dfad4')
 		puts "Sending => #{details} To => #{phone}"
-		nexmo.delay.send_message!({:to => "#{phone}", :from => '16136270717', :text => "#{details}", :sleep => 2})
+		nexmo.delay.send_message!({:to => "1#{phone}", :from => '16136270717', :text => "#{details}", :sleep => 2})
 	end
 
 	def can_send(user)
@@ -74,7 +74,13 @@ task :alert_users => :environment do
 
 	def accdnt_msgs(user,accidents)
 		user_streets = user.path.split(",").map(&:to_s) #Loads the User's streets from the db, removes commas and makes them an array
-				
+		
+		if user_streets.include?("ON-417")
+			user_streets << "Queensway"
+			user_streets << "Hwy 417"
+			user_streets << "Hwy-417"
+		end
+
 		accidents.each do |accident|
 			sauce = accident.details
 			current_accident = Accident.find(accident.id) 

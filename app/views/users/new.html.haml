@@ -10,7 +10,7 @@
 		.field
 			%label{:class => 'label'}Phone #
 			%br
-			= f.text_field :phone
+			= f.text_field :phone, :maxlength => 10, :size => 30
 		.button_div
 			%input{:type => "button", :id => 'button1', :value => "Next", :class => "button"}
 	.step{:id => 'step2'}

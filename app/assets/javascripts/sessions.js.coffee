@@ -45,9 +45,7 @@ $('#new_link').click ->
 redoSreets = ->
 	tmp = ""
 	$(".streetfield").each ->
-  		tmp += $(this).val().replace(/[^a-z0-9],./gi, "") + ","
-  		if $(this).val() == "ON-417" 
-		    tmp += 'Queensway,Hwy 417,'
+  		tmp += $(this).val().replace(/[^a-z0-9],./, "") + ","
   	tmp = tmp.slice(0,-1)
 
   	$('#pathfield').val(tmp)

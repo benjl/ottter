@@ -14,15 +14,12 @@ $ ->
 	$('#button4no').click ->
 		$('#sens').fadeIn()
 		$('#sched_checkbox').prop "checked", false
-		$('#button4yes').removeClass('yes')
-		$('#button4yes').removeClass('button')
-		$('#button4yes').addClass('inactive')
+		status("#sched_checkbox","#button4yes","#button4no")
 
 	$('#button4yes').click ->
 		$('#sched_act').fadeIn()
 		$('#sched_checkbox').prop "checked", true
-		$('#button4no').removeClass('button')
-		$('#button4no').addClass('inactive')
+		status("#sched_checkbox","#button4yes","#button4no")
 
 	$('#done_sched').click ->
 		$('#sens').fadeIn()
@@ -30,15 +27,12 @@ $ ->
 	$('#button5no').click ->
 		$('#end').fadeIn()
 		$('#sens_checkbox').prop "checked", false
-		$('#button5yes').removeClass('yes')
-		$('#button5yes').removeClass('button')
-		$('#button5yes').addClass('inactive')
+		status("#sens_checkbox","#button5yes","#button5no")
 
 	$('#button5yes').click ->
 		$('#end').fadeIn()
 		$('#sens_checkbox').prop "checked", true
-		$('#button5no').removeClass('button')
-		$('#button5no').addClass('inactive')
+		status("#sens_checkbox","#button5yes","#button5no")
 
 	$('#new_link').click ->
 		$('#street_text_fields').append "<div class='each_street'> <input class='streetfield' type='text'/> <a class='kill_link'> X </a> </div>"
@@ -56,7 +50,7 @@ $('#street_text_fields').on 'click','.kill_link', ->
 
  $ ->
 	redoSreets()
-	
+
 redoSreets = ->
 	tmp = ""
 	$(".streetfield").each ->
@@ -67,6 +61,17 @@ redoSreets = ->
 
   	$('#pathfield').val(tmp)
 
-
-
-	
+status = (element,oui,non) ->
+isChecked = (if $(element).prop("checked") then true else false)
+if isChecked == true
+	$(non).addClass('inactive')
+	$(non).removeClass('button')
+	$(oui).addClass('button')
+	$(oui).addClass('yes')
+	$(oui).removeClass('inactive')
+else if isChecked == false
+	$(oui).removeClass('button')
+	$(oui).removeClass('yes')
+	$(oui).addClass('inactive')
+	$(non).removeClass('inactive')
+	$(non).addClass('button')
