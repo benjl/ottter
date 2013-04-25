@@ -1,3 +1,5 @@
 .hero
-	= link_to('Settings', "/settings")
-	= link_to('Logout', "/logout")
+	
+	%a{:id => "/settings", :class => 'button'} Settings 
+	%br
+	%a{:id => "/logout", :class => 'button'} Logout
