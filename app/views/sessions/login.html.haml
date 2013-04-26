@@ -2,13 +2,14 @@
 	%h1 Log In
 	.notice
 		= notice
-	= form_tag(:action => 'login_attempt') do
-		%label Phone #:
-		%br
-		= text_field_tag(:phone)
-		%br
-		%label Password:
-		%br
-		= password_field_tag :login_password
-		%br
-		= submit_tag("Log In")
+	.login
+		= form_tag(:action => 'login_attempt') do
+			%label Phone #:
+			%br
+			= text_field_tag(:phone)
+			%br
+			%label Password:
+			%br
+			= password_field_tag :login_password
+			%br
+			= submit_tag "Log In", :class => 'button'

@@ -18,6 +18,12 @@ li{
 	background-color: #FFFFFF;
 }
 
+.notice{
+	margin: 15px auto;
+	background-color: yellow;
+	width: 400px;
+}
+
 select{
 	border: none;
 	font-size: 30px;
@@ -65,7 +71,7 @@ p{
 	border: 2px solid #FF007C;
 	background-color: #FF007C;
 	color: #FFFFFF;
-	font-size: 1.25em;
+	font-size: 30px;
 	height: auto;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -80,7 +86,7 @@ p{
 	border: 2px solid #696969;
 	background-color: #696969;
 	color: #FFFFFF;
-	font-size: 1.25em;
+	font-size: 30px;
 	height: auto;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -112,25 +118,34 @@ input:focus{
 	border-bottom: 1.5px solid #FF007C;
 	outline: none;
 }
+
+#add_street_button{
+	margin: 15px;
+}
+
 #new_link{
 	font-size: 30px;
 	padding:3px;
 	border: 2px solid #00FF00;
 	background-color: #00FF00;
 }
+
 #new_link:hover{
 	padding:3px;
 	border: 2px solid #00FF00;
 	background-color: #FFFFFF;
 	color:#00FF00;
 }
+
 #send{
 	font-size: 30px;
 }
+
 #street_text_fields{
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
-#step2, #step3, #sched, #sens, #end, #sched_act{
+
+#step2, #step3, #sched, #sens, #end, #sched_act, #sens_chk_dv, #sched_chk_dv{
 	display: none;
 }

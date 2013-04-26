@@ -8,7 +8,7 @@
 	-else
 		-patharr.each do |street|
 			.each_street
-				<input class='streetfield' type='text' value="#{street}"/>
+				<input class='streetfield' type='text' value="#{street}" size="18"/>
 				%a{:class => "kill_link"} X
 
 #add_street_button
@@ -19,8 +19,8 @@
 		.field
 			= f.text_field :path, :value => patharr.join(","), :id => 'pathfield'
 		
-		.button_div
-			%input{:type => "button",:id => 'button3', :value => "Next", :class => "button"}			
+	.button_div
+		%input{:type => "button",:id => 'button3', :value => "Next", :class => "button"}			
 	.step{:id => 'sched'}
 		.text
 			Would you like to schedule morning and evening times for your text alerts?
@@ -44,8 +44,6 @@
 			PM
 			= f.select :sched_eve_end, get_times()
 			PM
-		.button_div
-			%input{:type => "button",:id => 'done_sched', :value => "Next", :class => "button"}
 	.step{:id => 'sens'}
 		.text
 			Would you like to be alerted of Sens home games?

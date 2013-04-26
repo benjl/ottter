@@ -2,3 +2,25 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.hero {
+	margin-top: 40px;
+}
+
+.home_div{
+	margin: 30px;
+	font-size: 1.5em;
+	padding: 5px;
+}
+
+a{
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+a :visited{
+	color: #FFFFFF;
+}
+
+.login{
+	font-size: 2em;
+}

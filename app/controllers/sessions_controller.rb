@@ -26,9 +26,14 @@ class SessionsController < ApplicationController
 	end
 
 	def home
+		@user = User.find(session[:user_id])
 	end
 
 	def settings
 		@user = User.find(session[:user_id])
+	end
+
+	def delete
+
 	end
 end

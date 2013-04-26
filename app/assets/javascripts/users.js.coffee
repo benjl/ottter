@@ -18,11 +18,9 @@ $ ->
 
 	$('#button4yes').click ->
 		$('#sched_act').fadeIn()
+		$('#sens').fadeIn()
 		$('#sched_checkbox').prop "checked", true
 		status("#sched_checkbox","#button4yes","#button4no")
-
-	$('#done_sched').click ->
-		$('#sens').fadeIn()
 
 	$('#button5no').click ->
 		$('#end').fadeIn()
@@ -62,16 +60,16 @@ redoSreets = ->
   	$('#pathfield').val(tmp)
 
 status = (element,oui,non) ->
-isChecked = (if $(element).prop("checked") then true else false)
-if isChecked == true
-	$(non).addClass('inactive')
-	$(non).removeClass('button')
-	$(oui).addClass('button')
-	$(oui).addClass('yes')
-	$(oui).removeClass('inactive')
-else if isChecked == false
-	$(oui).removeClass('button')
-	$(oui).removeClass('yes')
-	$(oui).addClass('inactive')
-	$(non).removeClass('inactive')
-	$(non).addClass('button')
+	isChecked = (if $(element).prop("checked") then true else false)
+	if isChecked == true
+		$(non).addClass('inactive')
+		$(non).removeClass('button')
+		$(oui).addClass('button')
+		$(oui).addClass('yes')
+		$(oui).removeClass('inactive')
+	else if isChecked == false
+		$(oui).removeClass('button')
+		$(oui).removeClass('yes')
+		$(oui).addClass('inactive')
+		$(non).removeClass('inactive')
+		$(non).addClass('button')

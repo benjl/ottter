@@ -82,10 +82,11 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user = User.find(params[:id])
+    session[:user_id] = nil
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to "/users#index" }
+      format.html { redirect_to root_url, notice: "Your account has been deleted. Please come back." }
       format.json { head :no_content }
     end
   end

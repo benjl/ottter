@@ -1,38 +1,40 @@
 .banner
 	%h1 Sign Up
 
--if @user.errors.any?
-	- @user.errors.full_messages.each do |msg|
-		%li= msg
+.notice
+	-if @user.errors.any?
+		- @user.errors.full_messages.each do |msg|
+			%li= msg
+	=notice
 		
 =form_for @user do |f|
 	.step{:id => 'step1'}
 		.field
 			%label{:class => 'label'}Phone #
 			%br
-			= f.text_field :phone, :maxlength => 10, :size => 30
+			= f.text_field :phone, :maxlength => 10, :size => 18
 		.button_div
 			%input{:type => "button", :id => 'button1', :value => "Next", :class => "button"}
 	.step{:id => 'step2'}
 		.field
 			%label{:class => 'label'}Password
 			%br
-			= f.password_field :password
+			= f.password_field :password, :size => 18
 		.field
 			%label{:class => 'label'}Confirm Password
 			%br
-			= f.password_field :password_confirmation
+			= f.password_field :password_confirmation, :size => 18
 		.button_div
 			%input{:type => "button",:id => 'button2', :value => "Next", :class => "button"}
 	.step{:id => 'step3'}
 		.field
 			%label{:class => 'label'}Origin (Home)
 			%br
-			= f.text_field :street_orig
+			= f.text_field :street_orig, :size => 18
 		.field
 			%label{:class => 'label'}Destination (Work)
 			%br
-			= f.text_field :street_dest
+			= f.text_field :street_dest, :size => 18
 			= f.hidden_field :path
 		.button_div
 			%input{:type => "submit", :value => "Send", :class => "button", :id =>"submitbtn"}
