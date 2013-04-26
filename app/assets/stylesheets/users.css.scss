@@ -7,6 +7,11 @@ body{
 
 }
 
+.deets{
+	font-size: 12px;
+	font-style: italic;
+}
+
 li{
 	list-style-type: disc;
 	width: 400px;
@@ -39,7 +44,7 @@ select:hover{
 
 .step{
 	width: 400px;
-	margin:20px auto 0px auto;
+	margin:30px auto 0px auto;
 	font-size: 2em;
 	color: #696969;
 }
@@ -59,9 +64,6 @@ select:hover{
 	color: #FFFFFF;
 }
 
-p{
-	font-size: 1.25em;
-}
 .text{
 	line-height: normal;
 	margin: 10px;
@@ -117,6 +119,10 @@ input{
 input:focus{
 	border-bottom: 1.5px solid #FF007C;
 	outline: none;
+}
+
+#login_link{
+	margin-top: 15px;
 }
 
 #add_street_button{

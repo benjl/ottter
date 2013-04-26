@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 	validates_length_of :password, :in => 6..20, :on => :create
 
 
-	before_save :encrypt_password, :clear_path
+	before_save :encrypt_password
 	after_save :clear_password
 
 	def match_password(login_password="")
@@ -44,7 +44,4 @@ class User < ActiveRecord::Base
 		self.password = nil
 	end
 
-	def clear_path
-		
-	end
 end

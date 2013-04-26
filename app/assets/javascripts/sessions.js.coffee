@@ -42,14 +42,6 @@ $('#new_link').click ->
 		$('#street_text_fields').append "<div class='each_street'> <input class='streetfield' type='text'/> <a class='kill_link'> X </a> </div>"
 		redoSreets()
 
-redoSreets = ->
-	tmp = ""
-	$(".streetfield").each ->
-  		tmp += $(this).val().replace(/[^a-z0-9],./, "") + ","
-  	tmp = tmp.slice(0,-1)
-
-  	$('#pathfield').val(tmp)
-
 status = (element,oui,non) ->
 	isChecked = (if $(element).prop("checked") then true else false)
 	if isChecked == true

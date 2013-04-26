@@ -1,4 +1,5 @@
 $ ->
+
 	$('#button1').click ->
 		$('#step2').fadeIn()
 		$('#button1').hide()
@@ -53,8 +54,6 @@ redoSreets = ->
 	tmp = ""
 	$(".streetfield").each ->
   		tmp += $(this).val().replace(/[^a-z0-9],./gi, "") + ","
-  		if $(this).val() == "ON-417" 
-		    tmp += 'Queensway,Hwy 417,'
   	tmp = tmp.slice(0,-1)
 
   	$('#pathfield').val(tmp)

@@ -19,6 +19,24 @@ body{
   	line-height: 18px;
 }
 
+#top_login{
+	line-height: 0px;
+	height: 20px;
+	width: 10%;
+	float: right;
+	border: 2px solid #FF007C;
+	background-color: #FF007C;
+	color: #FFFFFF;
+	font-size: 15px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+#top_login:hover{
+	background-color: #FFFFFF;
+	color: #FF007C;
+}
+
 #logo_bar{
 	height: 40px;
 	width: 100%;

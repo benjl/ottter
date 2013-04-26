@@ -69,7 +69,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to "/login", notice: 'Congrats. Your profile successfully created/updated.' }
+        format.html { redirect_to "/home", notice: 'Congrats. Your profile successfully created/updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "confirm" }
