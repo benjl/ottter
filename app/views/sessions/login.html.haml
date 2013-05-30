@@ -1,5 +1,10 @@
-.login_form
+.banner
 	%h1 Log In
+
+.login_link
+	=link_to "(Sign Up Instead)", :controller => "users", :action => "new"
+
+.login_form
 	.notice
 		= notice
 	.login

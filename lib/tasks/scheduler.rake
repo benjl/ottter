@@ -48,13 +48,13 @@ task :alert_users => :environment do
 	def send_sms (phone, details)
 		nexmo = Nexmo::Client.new('f45ec1ce','460dfad4')
 		puts "Sending => #{details} To => #{phone}"
-		nexmo.delay.send_message!({:to => "1#{phone}", :from => '16136270717', :text => "#{details}", :sleep => 2})
+		nexmo.delay.send_message!({:to => "1#{phone}", :from => '16136272519', :text => "#{details}", :sleep => 2})
 	end
 
 	def can_send(user)
 		time = Time.now.strftime("%k").to_i
 
-		if user.sched #this is horrible, horribly broken. It doesn't even text people that chose not to schedule! Needs to be made a method. 
+		if user.sched
 			if time <= 11
 				if user.sched_mor_start <= time && user.sched_mor_end >= time
 					return true
@@ -68,7 +68,7 @@ task :alert_users => :environment do
 				console.log("INVALID TIME, USER => #{user.id}")
 			end
 		else
-			return false
+			return true
 		end
 	end
 
@@ -79,6 +79,9 @@ task :alert_users => :environment do
 			user_streets << "Queensway"
 			user_streets << "Hwy 417"
 			user_streets << "Hwy-417"
+		elsif user_streets.include?("ON-416")
+			user_streets << "Hwy 416"
+			user_streets << "Hwy-416"
 		end
 
 		accidents.each do |accident|
@@ -114,17 +117,8 @@ task :alert_users => :environment do
 end
 
 task :send_sens_alert => :environment do
-	def send_sms (phone, details)
-		nexmo = Nexmo::Client.new('f45ec1ce','460dfad4')
-		puts "Sending => #{details} To => #{phone}"
-		nexmo.delay.send_message!({:to => "#{phone}", :from => '16136270717', :text => "#{details}", :sleep => 2})
-	end
 
-	users.each do |user|
-		if user.sens
-			send_sms(user.phone,"Heads up on the drive home tonight, there's a Sens home game!")
-		end
-	end
+	#The season ended before I completed this feature, so it's TBD.
 
 end
 

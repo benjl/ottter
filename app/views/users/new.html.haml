@@ -1,6 +1,9 @@
 .banner
 	%h1 Sign Up
 
+.login_link
+	=link_to "(Login Instead)", :controller => "sessions", :action => "login"
+
 .notice
 	-if @user.errors.any?
 		- @user.errors.full_messages.each do |msg|

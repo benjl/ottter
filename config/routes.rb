@@ -13,7 +13,7 @@ Ottter::Application.routes.draw do
   match "settings", :to => "sessions#settings"
   match "login_attempt", :to => "sessions#login_attempt"
 
-  root :to => 'users#new'
+  root :to => 'StaticPages#land'
 
   match 'users/:id/confirm' => 'users#confirm', :as => :confirm
 

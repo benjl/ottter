@@ -7,6 +7,15 @@ body{
 
 }
 
+.login_link a{
+	color: #FF007C;
+}
+
+.login_link a:hover{
+	background-color: #FF007C;
+	color: #FFFFFF;
+}
+
 .deets{
 	font-size: 12px;
 	font-style: italic;

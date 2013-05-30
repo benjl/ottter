@@ -21,6 +21,15 @@ a :visited{
 	color: #FFFFFF;
 }
 
+.login_link a{
+	color: #FF007C;
+}
+
+.login_link a:hover{
+	background-color: #FF007C;
+	color: #FFFFFF;
+}
+
 .login{
 	font-size: 2em;
 }
