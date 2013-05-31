@@ -15,9 +15,6 @@
 	%a{:id => "new_link", :class => 'button'} Add New Street
 
 =form_for(@user) do |f|
-	.step{:id => 'showinfo'}
-		.field
-			= f.text_field :path, :value => patharr.join(","), :id => 'pathfield'
 		
 	.button_div
 		%input{:type => "button",:id => 'button3', :value => "Next", :class => "button"}			
