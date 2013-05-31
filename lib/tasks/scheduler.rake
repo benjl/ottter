@@ -48,7 +48,7 @@ task :alert_users => :environment do
 	def send_sms (phone, details)
 		nexmo = Nexmo::Client.new('f45ec1ce','460dfad4')
 		puts "Sending => #{details} To => #{phone}"
-		nexmo.delay.send_message!({:to => "1#{phone}", :from => '16136272519', :text => "#{details}", :sleep => 2})
+		nexmo.delay.send_message!({:to => "1#{phone}", :from => "16136272519", :text => "#{details}", :sleep => 2})
 	end
 
 	def can_send(user)
