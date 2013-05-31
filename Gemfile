@@ -1,7 +1,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.13'
 gem 'nokogiri'
 gem 'nexmo', :git => "git://github.com/benjl/nexmo.git"
 gem 'delayed_job_active_record'
