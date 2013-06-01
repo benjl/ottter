@@ -15,6 +15,10 @@
 	%a{:id => "new_link", :class => 'button'} Add New Street
 
 =form_for(@user) do |f|
+	.step{:id => 'showinfo'}
+		.field
+			= f.text_field :path, :value => patharr.join(","), :id => 'pathfield'
+	
 	.step{:id => 'sched-u'}
 		.text
 			Would you like to schedule morning and evening times for your text alerts?
