@@ -32,7 +32,7 @@ gem 'sass-rails',   '~> 3.2.3'
 gem 'coffee-rails', '~> 3.2.1'
 gem 'haml'
 gem "bcrypt-ruby", :require => "bcrypt"
-
+gem 'newrelic_rpm'
   
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
