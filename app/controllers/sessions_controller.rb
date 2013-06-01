@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
 		authorized_user = User.authenticate(params[:phone],params[:login_password])
 		if authorized_user
 			session[:user_id] = authorized_user.id
-			flash[:notice] = "Welcome. You have logged in with the # #{authorized_user.phone}"
+			flash[:notice] = "You have successfully been logged in"
 			redirect_to(:action => 'home')
 		else
 			flash[:notice] = "Invalid Phone # or Password"
