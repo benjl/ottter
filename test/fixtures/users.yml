@@ -4,7 +4,7 @@ one:
   phone: 6132928363
   street_orig: 730 Oakglade Ave.
   street_dest: 200 Isabella St.
-  path: Eagleson,ON-416,Kent,Arlington
+  path: Eagleson,ON-417Kent,Arlington
   sens: f
   sched: f
   sched_mor_start:
@@ -16,7 +16,7 @@ two:
   phone: 6132928363
   street_orig: 730 Oakglade Ave.
   street_dest: 200 Isabella St.
-  path: Eagleson,ON-416,Kent,Arlington
+  path: Eagleson,ON-417,Kent,Arlington
   sens: f
   sched: t
   sched_mor_start: 7
