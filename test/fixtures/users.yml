@@ -1,11 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
-  email: MyString
-  phone: MyString
+  phone: 6132928363
+  street_orig: 730 Oakglade Ave.
+  street_dest: 200 Isabella St.
+  path: Eagleson,ON-416,Kent,Arlington
+  sens: f
+  sched: f
+  sched_mor_start:
+  sched_mor_end:
+  sched_eve_start:
+  sched_eve_end:
 
 two:
-  name: MyString
-  email: MyString
-  phone: MyString
+  phone: 6132928363
+  street_orig: 730 Oakglade Ave.
+  street_dest: 200 Isabella St.
+  path: Eagleson,ON-416,Kent,Arlington
+  sens: f
+  sched: t
+  sched_mor_start: 7
+  sched_mor_end: 10
+  sched_eve_start: 4
+  sched_eve_end: 6
