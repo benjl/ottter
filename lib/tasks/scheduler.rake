@@ -91,6 +91,7 @@ task :alert_users => :environment do
 				user_streets.each do |street|		
 					if sauce.include?(street)
 						send_sms(user.phone,accident.details)
+						console.log "Sending alert to #{user.phone}"
 					end
 				end
 			end

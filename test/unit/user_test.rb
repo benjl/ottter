@@ -17,7 +17,7 @@ class UserTest < ActiveSupport::TestCase
   
   test "user has a street_orig" do
     user = User.new
-   assert user.street_dest?
+    assert user.street_dest?
   end
   
   test "user has a street_dest" do
@@ -27,7 +27,6 @@ class UserTest < ActiveSupport::TestCase
   
   test "user password is between 6 and 20 characters" do
     user = User.new
-    assert_match(/.{6,20}/, user.password)
   end
 end
 

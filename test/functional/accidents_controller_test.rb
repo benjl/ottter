@@ -5,37 +5,11 @@ class AccidentsControllerTest < ActionController::TestCase
     @accident = accidents(:one)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:accidents)
-  end
-
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
   test "should create accident" do
     assert_difference('Accident.count') do
       post :create, accident: { details: @accident.details, tid: @accident.tid, time: @accident.time }
     end
 
-    assert_redirected_to accident_path(assigns(:accident))
-  end
-
-  test "should show accident" do
-    get :show, id: @accident
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, id: @accident
-    assert_response :success
-  end
-
-  test "should update accident" do
-    put :update, id: @accident, accident: { details: @accident.details, tid: @accident.tid, time: @accident.time }
     assert_redirected_to accident_path(assigns(:accident))
   end
 
