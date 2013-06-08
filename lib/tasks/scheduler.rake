@@ -54,13 +54,13 @@ task :alert_users => :environment do
 	def can_send(user)
 		time = Time.now.strftime("%k").to_i
 
-		if user.sched
+		if user.sched == true
 			if time <= 11
 				if user.sched_mor_start <= time && user.sched_mor_end >= time
 					return true
 				end
 			elsif time >= 12
-				if user.sched_eve_start <= time && user.sched_eve_end >= time
+				if user.sched_eve_start <= time - 12 && user.sched_eve_end >= time - 12
 					return true
 				end
 			else
