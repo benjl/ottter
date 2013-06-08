@@ -6,7 +6,7 @@ desc "This gets all tweets, cleans them, and adds them to Accident - to be calle
 
 task :get_tweets => :environment do
   
-	def make_proper_array (nokoname, newname)
+	def make_proper_array (nokoname, newname) #Nokogiri compiles everything all messed up - this just makes it a clean array
 		nokoname.each do |x|
 			newname.push(x.text)
 		end
@@ -24,7 +24,7 @@ task :get_tweets => :environment do
 	make_proper_array(rawstatus, cleanstatus)
 	make_proper_array(rawid, cleanid)
 
-	cleaninfo = Hash[cleanid.zip(cleanstatus)]
+	cleaninfo = Hash[cleanid.zip(cleanstatus)] #Combines the status (description) and ID (the TID) arrays into a hash
 
 	cleaninfo.delete_if{|k,v| !v.match(/^Ottawa -/)} #Removes non-Ottawa tweets (nobody cares about Cornwall)
 
@@ -118,7 +118,7 @@ task :alert_users => :environment do
 		end
 	end	
 	
-	accidents.each do |accident|
+	accidents.each do |accident| #Now the alerting is done, set all sms_sent statuses to true
 		accident.sms_sent = "true"
 		accident.save
 	end
@@ -130,7 +130,7 @@ task :send_sens_alert => :environment do
 
 end
 
-task :reset_sms => :environment do
+task :reset_sms => :environment do #Should probably delete this, used for early testing. Would actually cost a few dollars in SMS if ran
 	accidents = Accident.find(:all)
 
 	accidents.each do |accident|
