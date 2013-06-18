@@ -1,40 +1,55 @@
-require 'nokogiri'
-require 'open-uri'
+require 'oauth'
+require 'json'
 require 'nexmo'
 
 desc "This gets all tweets, cleans them, and adds them to Accident - to be called by Heroku Scheduler"
 
 task :get_tweets => :environment do
   
-	def make_proper_array (nokoname, newname) #Nokogiri compiles everything all messed up - this just makes it a clean array
-		nokoname.each do |x|
-			newname.push(x.text)
-		end
+	#----------Twitter Oauth Stuff ----------------
+	consumer_key = OAuth::Consumer.new(
+	    "QTwARV2bD20hkW8rRg9KOw",
+	    "f9c6hbdpg5qoCiEY5Y9LZPyDQXGHVBKAejWBMM")
+	access_token = OAuth::Token.new(
+	    "18572865-Ih12zZXKQI5T6kotHXA66VpD0cilR4IVfffk8tefe",
+	    "m7udyW1Qz70vrQvyZHShVk7bwdszL3kzDL7BdI4IkTo")
+
+	address = URI("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=1310traffic")
+
+	#--------- Connecting to Twitter ---------------
+	http = Net::HTTP.new address.host, address.port
+	http.use_ssl = true #SSL required by Twitter
+	http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+
+	request = Net::HTTP::Get.new address.request_uri
+	request.oauth! http, consumer_key, access_token
+
+	#--------- Making request -----------------
+	http.start
+	response = http.request request
+	feed =nil
+	feed = JSON.parse(response.body)
+
+	#-------- Getting Tweets and TIDs -------------
+	tid = []
+	text = []
+	feed.each do |tweet|
+		tid.push(tweet['id_str'])
+		text.push(tweet['text'])
 	end
 
-	tweetsxml = Nokogiri::XML(open('https://api.twitter.com/1/statuses/user_timeline.xml?screen_name=1310traffic'))
-	#tweetsxml = Nokogiri::XML(open('https://api.twitter.com/1/statuses/user_timeline.xml?screen_name=benjlcox'))
-	
-	rawstatus = tweetsxml.xpath("//status//text")
-	rawid = tweetsxml.xpath("//status/id")
-	
-	cleanstatus = []
-	cleanid = []
+	tweets = Hash[tid.zip(text)] #Combine tweets and tids into a single hash (Tid => Tweet)
 
-	make_proper_array(rawstatus, cleanstatus)
-	make_proper_array(rawid, cleanid)
-
-	cleaninfo = Hash[cleanid.zip(cleanstatus)] #Combines the status (description) and ID (the TID) arrays into a hash
-
-	cleaninfo.delete_if{|k,v| !v.match(/^Ottawa -/)} #Removes non-Ottawa tweets (nobody cares about Cornwall)
-
-	cleaninfo.each do |k,v| #Removing a bunch of unnecessary tweet related stuff
-		v.gsub!(/^.{9}/, "") 
-		v.gsub!(/\s[#].+$/, "")
-		v[0] = v.first.capitalize[0]
+	#-------- Cleaning up the Tweets --------------
+	tweets.delete_if{|k,v| !v.match(/^Ottawa -/)} #Removes non-Ottawa tweets
+	tweets.each do |k,v| 
+		v.gsub!(/^.{9}/, "") #Removes where it says "Ottawa - "
+		v.gsub!(/\s[#].+$/, "") #Removes hashtags
+		v[0] = v[0].capitalize #Capitalizes first letter of the sentence
 	end
 
-	cleaninfo.each do |k,v|
+	#-------- Save tweets to the DB -------------
+	tweets.each do |k,v|
 		if Accident.exists?(:tid => k) == false #Make sure the tweet isn't already saved to the DB by checking if TID is already there
 			Accident.create(:tid => "#{k}", :details => "#{v}", :time => "#{Time.now.to_i}") #Saving tweet to db, adding unix time
 		end

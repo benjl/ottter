@@ -68,6 +68,7 @@ GEM
     multi_json (1.7.4)
     newrelic_rpm (3.6.3.104)
     nokogiri (1.5.9)
+    oauth (0.4.7)
     pg (0.15.1)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -128,6 +129,7 @@ DEPENDENCIES
   newrelic_rpm
   nexmo!
   nokogiri
+  oauth
   pg
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
