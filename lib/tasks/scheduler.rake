@@ -64,7 +64,7 @@ task :alert_users => :environment do
 
 	def send_sms (phone, details)
 		nexmo = Nexmo::Client.new('f45ec1ce','460dfad4')
-		response = nexmo.delay.send_message({:to => "1#{phone}", :from => "16136272519", :text => "#{details}", :sleep => 2})
+		nexmo.delay.send_message!({:to => "1#{phone}", :from => "16136272519", :text => "#{details}", :sleep => 2})
 	end
 
 	#Method for determining if messages should be sent
@@ -134,7 +134,7 @@ task :alert_users => :environment do
 	end	
 	
 	accidents.each do |accident| #Now the alerting is done, set all sms_sent statuses to true
-		accident.sms_sent = "true"
+		accident.sms_sent = true
 		accident.save
 	end
 end
