@@ -64,7 +64,13 @@ task :alert_users => :environment do
 
 	def send_sms (phone, details)
 		nexmo = Nexmo::Client.new('f45ec1ce','460dfad4')
-		nexmo.delay.send_message!({:to => "1#{phone}", :from => "16136272519", :text => "#{details}", :sleep => 2})
+		nexmo.delay.send_message({:to => "1#{phone}", :from => "16136272519", :text => "#{details}", :sleep => 2})
+
+		if response.ok?
+			puts "Send Successful"
+		else
+			puts response.body
+		end
 	end
 
 	#Method for determining if messages should be sent
