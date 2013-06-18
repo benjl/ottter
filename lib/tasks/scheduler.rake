@@ -34,7 +34,7 @@ task :get_tweets => :environment do
 	tid = []
 	text = []
 	feed.each do |tweet|
-		tid.push(tweet['id_str'])
+		tid.push(tweet['id'])
 		text.push(tweet['text'])
 	end
 
