@@ -6,4 +6,4 @@ Collision reports are pulled from Twitter (using JSON with oAuth authentication 
 
 Overall, this app (as it stands) probably violates the Google Maps TOS, maybe the Twitter TOS, and possible even Canadian copyright law (not sure if Tweets are copyrighted or not - seems to be a grey area). Nevertheless, it's useful and was great to build. 
 
-Still not done, though, as tests are virtually non-existent (which is abhorent, I know - but I'm working on learning Test::Unit!)
+Still not done, though, as tests are virtually non-existent (which is abhorent, I know - but I'm working on getting better with Test::Unit before I tackle it)
