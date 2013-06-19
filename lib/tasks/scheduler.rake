@@ -61,7 +61,7 @@ desc "Search Accidents for streets in Users and alert the users via SMS"
 task :alert_users => :environment do
 	
 	#Nexmo stuff
-	class nexmo_stuff
+	class NexmoStuff
 		def send_sms (phone, details)
 			nexmo = Nexmo::Client.new('f45ec1ce','460dfad4')
 			nexmo.send_message!({:to => "1#{phone}", :from => "16136272519", :text => "#{details}", :sleep => 2})
