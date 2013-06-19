@@ -4,6 +4,6 @@ An app for the Ottawa area that determines your driving route to work and then t
 
 Collision reports are pulled from Twitter (using JSON with oAuth authentication - didn't use the Twitter gem because it seemed like cheating), alerts are scheduled via a Heroku scheduler rake task and delayed job, and texts are sent from a forked Nexmo wrapper (added a sleep param to better handle North American SMS throughput limitations)
 
-Overall, this app (as it stands) probably violates the Google Maps TOS, maybe the Twitter TOS, and possible even Canadian copyright law (not sure if Tweets are copyrighted or not - seems to be a grey area). Nevertheless, it's useful and was great to build. 
+Overall, this app (as it stands) probably violates the Google Maps TOS and possibly Canadian copyright law (not sure if Tweets are copyrighted or not - seems to be a grey area). Nevertheless, it's useful and was great to build. 
 
 Still not done, though, as tests are virtually non-existent (which is abhorent, I know - but I'm working on getting better with Test::Unit before I tackle it)
