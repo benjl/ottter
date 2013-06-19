@@ -61,13 +61,13 @@ desc "Search Accidents for streets in Users and alert the users via SMS"
 task :alert_users => :environment do
 	
 	#Nexmo stuff
-
-	def send_sms (phone, details)
-		nexmo = Nexmo::Client.new('f45ec1ce','460dfad4')
-		nexmo.send_message!({:to => "1#{phone}", :from => "16136272519", :text => "#{details}", :sleep => 2})
+	class nexmo_stuff
+		def send_sms (phone, details)
+			nexmo = Nexmo::Client.new('f45ec1ce','460dfad4')
+			nexmo.send_message!({:to => "1#{phone}", :from => "16136272519", :text => "#{details}", :sleep => 2})
+		end
+		handle_asynchronously :send_sms #Use delayed_job on sending texts
 	end
-	handle_asynchronously :send_sms #Use delayed_job on sending texts
-
 	#Method for determining if messages should be sent
 
 	def can_send(user)
@@ -115,7 +115,7 @@ task :alert_users => :environment do
 			if current_accident.sms_sent == false #Finds accidents that haven't been sent
 				user_streets.each do |street| #Iterates over users		
 					if sauce.include?(street) #Finds if user cares about that accident
-						send_sms(user.phone,accident.details) #Sends SMS to user
+						nexmo_stuff.send_sms(user.phone,accident.details) #Sends SMS to user
 						puts "Sending alert to #{user.phone}"
 					end
 				end
