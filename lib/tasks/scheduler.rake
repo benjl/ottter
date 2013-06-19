@@ -62,7 +62,7 @@ task :alert_users => :environment do
 	
 	#Nexmo stuff
 	class NexmoStuff
-		def send_sms (phone, details)
+		def self.send_sms (phone, details)
 			nexmo = Nexmo::Client.new('f45ec1ce','460dfad4')
 			nexmo.send_message!({:to => "1#{phone}", :from => "16136272519", :text => "#{details}", :sleep => 2})
 		end
