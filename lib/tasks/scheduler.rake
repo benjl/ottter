@@ -66,6 +66,7 @@ task :alert_users => :environment do
 		nexmo = Nexmo::Client.new('f45ec1ce','460dfad4')
 		nexmo.send_message!({:to => "1#{phone}", :from => "16136272519", :text => "#{details}", :sleep => 2})
 	end
+	handle_asynchronously :send_sms #Use delayed_job on sending texts
 
 	#Method for determining if messages should be sent
 
