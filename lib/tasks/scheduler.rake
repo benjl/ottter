@@ -89,7 +89,7 @@ task :alert_users => :environment do
 				end
 			else
 				return false
-				console.log("INVALID TIME, USER => #{user.id}")
+				puts "INVALID TIME, USER => #{user.id}"
 			end
 		else
 			return true
