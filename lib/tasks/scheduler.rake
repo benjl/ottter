@@ -1,6 +1,6 @@
 require 'oauth'
 require 'json'
-require 'nexmo'
+require 'twilio-ruby'
 
 desc "This gets all tweets, cleans them, and adds them to Accident - to be called by Heroku Scheduler"
 
@@ -60,12 +60,14 @@ desc "Search Accidents for streets in Users and alert the users via SMS"
 
 task :alert_users => :environment do
 	
-	#Nexmo stuff
+	#Twilio stuff
 	def send_sms (phone, details)
-		nexmo = Nexmo::Client.new('f45ec1ce','460dfad4')
-		nexmo.send_message!({:to => "1#{phone}", :from => "16136272519", :text => "#{details}", :sleep => 2})
-		#THIS SHOULD HAVE DELAYED JOB
-		#Something *really* broke with Nexmo - utterly hates dj now. Still working on a fix.
+		@account_sid = 'AC5328128ca782cfad1d1b621ab0a894b2'
+		@auth_token = 'f8465283cef782dda6215ea299991248'
+		@client = Twilio::REST::Client.new(@account_sid, @auth_token)
+		@account = @client.account
+		@message = @account.sms.messages.delay.create({:from => '+16136991109', :to => "1#{phone}", :body => "#{details}"})
+		puts @message
 	end
 	
 	
