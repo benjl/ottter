@@ -119,7 +119,7 @@ task :alert_users => :environment do
 				user_streets.each do |street| #Iterates over users		
 					if sauce.include?(street) #Finds if user cares about that accident
 						send_sms(user.phone,accident.details) #Sends SMS to user
-						puts "Sending alert to #{user.phone}"
+						puts "Sending alert to #{user.phone} => '#{current_accident.details}"
 					end
 				end
 			end
