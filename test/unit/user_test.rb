@@ -4,29 +4,43 @@ class UserTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
-  
-  test "user has a phone number" do
-    user = User.new
-    assert user.phone?
-  end
+
+  @user = User.new( phone: )
   
   test "user has a valid phone number" do
-    user = User.new
-    assert user.phone.length === "10"
+    @user.phone = 555
+    assert !user.save
+
+    @user.phone = 613-293-8463
+    assert !user.save
+
+    @user.phone = nil
+    assert !user.save
   end
   
   test "user has a street_orig" do
-    user = User.new
-    assert user.street_dest?
+    @user.street_orig = "730 Oakglade Ave."
+    assert user.save?
+
+    @user.street_orig = ""
+    assert !user.save?
   end
   
   test "user has a street_dest" do
-    user = User.new
-    assert_match user.street_orig?
+    @user.street_dest = ""
+    assert !user.save?
   end
   
   test "user password is between 6 and 20 characters" do
-    user = User.new
+    @user.password = "short"
+    assert !user.save?
+
+    @user.password = "nowthisisastoryallabouthowmylifegottwisturnedupsidedown"
+    assert !user.save?
+
+    @user.password = "justright"
+    asset user.save?
+
   end
 end
 
